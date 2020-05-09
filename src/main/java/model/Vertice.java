@@ -38,7 +38,7 @@ public class Vertice implements Comparable<Vertice> {
         this.anterior = anterior;
     }
 
-    Map<Vertice, Integer> getVizinhos() {
+    public Map<Vertice, Integer> getVizinhos() {
         return vizinhos;
     }
 
