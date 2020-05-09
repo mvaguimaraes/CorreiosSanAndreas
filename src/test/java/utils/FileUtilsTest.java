@@ -1,13 +1,9 @@
-import model.Encomenda;
-import model.Grafo;
-import model.Vertice;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import utils.FileUtils;
+package utils;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import domain.Encomenda;
+import domain.Cidade;
+import org.junit.Test;
+
 import java.util.*;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -19,12 +15,12 @@ public class FileUtilsTest {
     @Test
     public void testLerTrechosComDadosValidosDeveRetornarUmMapaDeArestasValido() {
 
-        final Map<String, Vertice> arestasEsperadas = gerarMapaDeArestas();
-        final Map<String, Vertice> arestasLidas = FileUtils.lerArquivoTrechos("testes/trechos");
+        final Map<String, Cidade> arestasEsperadas = gerarMapaDeArestas();
+        final Map<String, Cidade> arestasLidas = FileUtils.lerArquivoTrechos("testes/trechos");
 
         assertThat(arestasEsperadas.size(), is(equalTo(arestasLidas.size())));
 
-        for (Map.Entry<String, Vertice> arestaLida : arestasLidas.entrySet()) {
+        for (Map.Entry<String, Cidade> arestaLida : arestasLidas.entrySet()) {
             assertThat(arestasEsperadas.get(arestaLida.getKey()).getNome(), is(equalTo(arestaLida.getValue().getNome())));
             assertThat(arestasEsperadas.get(arestaLida.getKey()).getVizinhos().size(), is(equalTo(arestaLida.getValue().getVizinhos().size())));
         }
@@ -44,14 +40,14 @@ public class FileUtilsTest {
         }
     }
 
-    private Map<String, Vertice> gerarMapaDeArestas() {
-        Map<String, Vertice> grafo  = new HashMap<String, Vertice>() {{
-            put("LS", new Vertice("LS"));
-            put("SF", new Vertice("SF"));
-            put("LV", new Vertice("LV"));
-            put("RC", new Vertice("RC"));
-            put("WS", new Vertice("WS"));
-            put("BC", new Vertice("BC"));
+    private Map<String, Cidade> gerarMapaDeArestas() {
+        Map<String, Cidade> grafo  = new HashMap<String, Cidade>() {{
+            put("LS", new Cidade("LS"));
+            put("SF", new Cidade("SF"));
+            put("LV", new Cidade("LV"));
+            put("RC", new Cidade("RC"));
+            put("WS", new Cidade("WS"));
+            put("BC", new Cidade("BC"));
         }};
 
         grafo.get("LS").addVizinho(grafo.get("SF"), 1);

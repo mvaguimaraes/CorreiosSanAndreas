@@ -1,19 +1,19 @@
-package model;
+package domain;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Vertice implements Comparable<Vertice> {
+public class Cidade implements Comparable<Cidade> {
     private final String nome;
     private int distancia = Integer.MAX_VALUE;
-    private Vertice anterior = null;
-    private final Map<Vertice, Integer> vizinhos = new HashMap<>();
+    private Cidade anterior = null;
+    private final Map<Cidade, Integer> vizinhos = new HashMap<>();
 
-    public Vertice(String nome) {
+    public Cidade(String nome) {
         this.nome = nome;
     }
 
-    public void addVizinho(Vertice vizinho, int distancia) {
+    public void addVizinho(Cidade vizinho, int distancia) {
         vizinhos.put(vizinho, distancia);
 
     }
@@ -26,23 +26,23 @@ public class Vertice implements Comparable<Vertice> {
         return distancia;
     }
 
-    void setDistancia(int distancia) {
+    public void setDistancia(int distancia) {
         this.distancia = distancia;
     }
 
-    public Vertice getAnterior() {
+    public Cidade getAnterior() {
         return anterior;
     }
 
-    void setAnterior(Vertice anterior) {
+    public void setAnterior(Cidade anterior) {
         this.anterior = anterior;
     }
 
-    public Map<Vertice, Integer> getVizinhos() {
+    public Map<Cidade, Integer> getVizinhos() {
         return vizinhos;
     }
 
-    public int compareTo(Vertice other) {
+    public int compareTo(Cidade other) {
         if (distancia == other.distancia)
             return nome.compareTo(other.nome);
 

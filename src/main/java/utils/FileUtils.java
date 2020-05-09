@@ -1,8 +1,7 @@
 package utils;
 
-import model.Encomenda;
-import model.Grafo;
-import model.Vertice;
+import domain.Encomenda;
+import domain.Cidade;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -14,10 +13,10 @@ public class FileUtils {
 
     private static final String DELIMITADOR = " ";
 
-    public static Map<String, Vertice> lerArquivoTrechos(String nomeArquivo) {
+    public static Map<String, Cidade> lerArquivoTrechos(String nomeArquivo) {
         String linha;
         int numLinha = 1;
-        Map<String, Vertice> arestas = new HashMap<>();
+        Map<String, Cidade> arestas = new HashMap<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(String.format("src/main/resources/%s.txt", nomeArquivo)))) {
             while ((linha = br.readLine()) != null) {
@@ -25,10 +24,10 @@ public class FileUtils {
 
                 if (lineArray.length == 3) {
                     if (!arestas.containsKey(lineArray[0])) {
-                        arestas.put(lineArray[0], new Vertice(lineArray[0]));
+                        arestas.put(lineArray[0], new Cidade(lineArray[0]));
                     }
                     if (!arestas.containsKey(lineArray[1])) {
-                        arestas.put(lineArray[1], new Vertice(lineArray[1]));
+                        arestas.put(lineArray[1], new Cidade(lineArray[1]));
                     }
                     arestas.get(lineArray[0]).addVizinho(arestas.get(lineArray[1]), Integer.parseInt(lineArray[2]));
                     numLinha++;
@@ -74,22 +73,7 @@ public class FileUtils {
         return encomendas;
     }
 
-    public static void processarEncomendas(Map<String, Vertice> arestas, List<Encomenda> encomendas, String nomeArquivoRotas) {
-
-        Grafo g = new Grafo(arestas);
-
-        for (Encomenda encomenda : encomendas) {
-            g.dijkstra(encomenda.getOrigem());
-            if (!g.getGrafo().containsKey(encomenda.getOrigem())) {
-                System.out.println(String.format("Grafo não contém o vértice de origem: \"%s\"\n", encomenda.getOrigem()));
-            } else {
-                escreverArquivoRotas(g.getGrafo().get(encomenda.getDestino()), nomeArquivoRotas);
-            }
-        }
-
-    }
-
-    private static void escreverArquivoRotas(Vertice vertice, String nomeArquivo) {
+    public static void escreverArquivoRotas(Cidade cidade, String nomeArquivo) {
         File log = new File(String.format("src/main/resources/%s.txt", nomeArquivo));
         try{
             if(!log.exists()){
@@ -97,9 +81,9 @@ public class FileUtils {
                 log.createNewFile();
             }
             PrintWriter out = new PrintWriter(new FileWriter(log, true));
-            boolean success = imprimirRota(out, vertice);
+            boolean success = imprimirRota(out, cidade);
             if (success) {
-                out.append(Integer.toString(vertice.getDistancia()));
+                out.append(Integer.toString(cidade.getDistancia()));
             }
             out.append("\n");
             out.close();
@@ -108,16 +92,16 @@ public class FileUtils {
         }
     }
 
-    private static boolean imprimirRota(PrintWriter out, Vertice vertice) {
-        if (vertice.getAnterior() == vertice) {
-            out.append(String.format("%s ", vertice.getNome()));
+    private static boolean imprimirRota(PrintWriter out, Cidade cidade) {
+        if (cidade.getAnterior() == cidade) {
+            out.append(String.format("%s ", cidade.getNome()));
             return true;
-        } else if (vertice.getAnterior() == null) {
-            out.append(String.format("O vértice %s não é alcançável!", vertice.getNome()));
+        } else if (cidade.getAnterior() == null) {
+            out.append(String.format("O vértice %s não é alcançável!", cidade.getNome()));
             return false;
         } else {
-            imprimirRota(out, vertice.getAnterior());
-            out.append(String.format("%s ", vertice.getNome()));
+            imprimirRota(out, cidade.getAnterior());
+            out.append(String.format("%s ", cidade.getNome()));
             return true;
         }
     }

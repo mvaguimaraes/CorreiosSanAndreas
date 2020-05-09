@@ -1,5 +1,6 @@
-import model.Encomenda;
-import model.Vertice;
+import controller.ControllerDeEncomendas;
+import domain.Encomenda;
+import domain.Cidade;
 import utils.FileUtils;
 
 import java.util.List;
@@ -10,10 +11,11 @@ public class Main {
     public static void main(String[] args) {
 
         //Processando o arquivo de trechos
-        Map<String, Vertice> trechos = FileUtils.lerArquivoTrechos("trechos");
+        Map<String, Cidade> trechos = FileUtils.lerArquivoTrechos("trechos");
         //Processando o arquivo de encomendas
         List<Encomenda> encomendas = FileUtils.lerArquivoEncomendas("encomendas");
         //Gerando o arquivo de rotas
-        FileUtils.processarEncomendas(trechos, encomendas, "rotas");
+        ControllerDeEncomendas controllerDeEncomendas = new ControllerDeEncomendas(trechos);
+        controllerDeEncomendas.processarEncomendas(encomendas, "rotas");
     }
 }
