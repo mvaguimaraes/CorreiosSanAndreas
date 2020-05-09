@@ -11,7 +11,7 @@ public class Main {
 
         //Processando o arquivo de trechos
         Map<String, Vertice> trechos = FileUtils.lerArquivoTrechos("trechos");
-        //Processando o arquivo de encomendas.txt
+        //Processando o arquivo de encomendas
         List<Encomenda> encomendas = FileUtils.lerArquivoEncomendas("encomendas");
         //Gerando o arquivo de rotas
         FileUtils.processarEncomendas(trechos, encomendas, "rotas");
