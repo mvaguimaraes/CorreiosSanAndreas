@@ -27,6 +27,14 @@ public class FileUtilsTest {
     }
 
     @Test
+    public void testLerTrechosComArestasPesoNegativoDeveRetornarMapaDeTrechosVazio() {
+
+        final Map<String, Cidade> arestasLidas = FileUtils.lerArquivoTrechos("testes/trechos_negativos_teste");
+
+        assertThat(0, is(equalTo(arestasLidas.size())));
+    }
+
+    @Test
     public void testLerTrechosComParametroNuloDeveRetornarMapaVazio() {
 
         final Map<String, Cidade> arestasLidas = FileUtils.lerArquivoTrechos(null);
@@ -81,6 +89,7 @@ public class FileUtilsTest {
 
         return grafo;
     }
+
 
     private List<Encomenda> gerarEncomendas() {
         return new ArrayList<>(Arrays.asList(

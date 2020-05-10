@@ -1,0 +1,4 @@
+LS SF -1
+SF LS -2
+LS LV -1
+LV LS -1

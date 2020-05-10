@@ -23,7 +23,7 @@ public class FileUtils {
                 while ((linha = br.readLine()) != null) {
                     String[] lineArray = linha.split(DELIMITADOR);
 
-                    if (lineArray.length == 3) {
+                    if (lineArray.length == 3 && !verificarPesoNegativo(Integer.parseInt(lineArray[2]))) {
                         if (!arestas.containsKey(lineArray[0])) {
                             arestas.put(lineArray[0], new Cidade(lineArray[0]));
                         }
@@ -33,7 +33,7 @@ public class FileUtils {
                         arestas.get(lineArray[0]).addVizinho(arestas.get(lineArray[1]), Integer.parseInt(lineArray[2]));
                         numLinha++;
                     } else {
-                        System.out.println(String.format("A linha %d do arquivo trechos.txt foi pulada porque está no formato errado!", numLinha));
+                        System.out.println(String.format("A linha %d do arquivo %s.txt foi pulada porque está no formato errado! As cidades de origem e destino devem estar presentes e a distância entre elas deve ser positiva.", numLinha, nomeArquivo));
                         numLinha++;
                     }
                 }
@@ -124,5 +124,12 @@ public class FileUtils {
         } else {
             return false;
         }
+    }
+
+    private static boolean verificarPesoNegativo(int peso) {
+        if (peso < 0) {
+            return true;
+        }
+        return false;
     }
 }
