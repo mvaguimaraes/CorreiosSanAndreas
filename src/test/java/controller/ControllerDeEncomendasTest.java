@@ -53,6 +53,16 @@ public class ControllerDeEncomendasTest {
         assertNull(trechos.get(DESTINO).getAnterior());
     }
 
+    @Test
+    public void testDijkstraComParametroNuloNaoDeveRetornarUmMenorCaminhoValido() {
+        final String DESTINO = "LS";
+        final Map<String, Cidade> trechos = gerarMapaDeTrechos();
+        final ControllerDeEncomendas controllerDeEncomendas = new ControllerDeEncomendas(trechos);
+        controllerDeEncomendas.menorCaminhoDijkstra(null);
+
+        assertNull(trechos.get(DESTINO).getAnterior());
+    }
+
     private Map<String, Cidade> gerarMapaDeTrechos() {
         Map<String, Cidade> grafo  = new HashMap<String, Cidade>() {{
             put("LS", new Cidade("LS"));

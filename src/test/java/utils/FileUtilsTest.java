@@ -1,7 +1,7 @@
 package utils;
 
-import domain.Encomenda;
 import domain.Cidade;
+import domain.Encomenda;
 import org.junit.Test;
 
 import java.util.*;
@@ -16,7 +16,7 @@ public class FileUtilsTest {
     public void testLerTrechosComDadosValidosDeveRetornarUmMapaDeArestasValido() {
 
         final Map<String, Cidade> arestasEsperadas = gerarMapaDeArestas();
-        final Map<String, Cidade> arestasLidas = FileUtils.lerArquivoTrechos("testes/trechos");
+        final Map<String, Cidade> arestasLidas = FileUtils.lerArquivoTrechos("testes/trechos_teste");
 
         assertThat(arestasEsperadas.size(), is(equalTo(arestasLidas.size())));
 
@@ -27,10 +27,18 @@ public class FileUtilsTest {
     }
 
     @Test
+    public void testLerTrechosComParametroNuloDeveRetornarMapaVazio() {
+
+        final Map<String, Cidade> arestasLidas = FileUtils.lerArquivoTrechos(null);
+
+        assertThat(0, is(equalTo(arestasLidas.size())));
+    }
+
+    @Test
     public void testLerEncomendasComDadosValidosDeveRetornarUmaListaValida() {
 
         final List<Encomenda> encomendasEsperadas = gerarEncomendas();
-        final List<Encomenda> encomendasLidas = FileUtils.lerArquivoEncomendas("testes/encomendas");
+        final List<Encomenda> encomendasLidas = FileUtils.lerArquivoEncomendas("testes/encomendas_teste");
 
         assertThat(encomendasEsperadas.size(), is(equalTo(encomendasLidas.size())));
 
@@ -38,6 +46,14 @@ public class FileUtilsTest {
             assertThat(encomendasEsperadas.get(i).getOrigem(), is(equalTo(encomendasLidas.get(i).getOrigem())));
             assertThat(encomendasEsperadas.get(i).getDestino(), is(equalTo(encomendasLidas.get(i).getDestino())));
         }
+    }
+
+    @Test
+    public void testLerEncomendasComParametroNuloDeveRetornarListaVazia() {
+
+        final List<Encomenda> encomendasLidas = FileUtils.lerArquivoEncomendas(null);
+
+        assertThat(0, is(equalTo(encomendasLidas.size())));
     }
 
     private Map<String, Cidade> gerarMapaDeArestas() {
