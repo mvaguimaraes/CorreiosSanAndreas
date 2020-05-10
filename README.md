@@ -20,7 +20,7 @@ O pacote `utils` contém o arquivo utilitário para manejo dos arquivos de entra
   
 2. Os arquivos **encomendas.txt** e **trechos.txt** encontram-se dentro da pasta **src/main/resources** e o arquivo **rotas.txt** também é gerado neste diretório;  
   
-3. Execute o método `main` da classe **Main**.
+3. Execute o método `main()` da classe **Main**.
 
 ## Testes  
   
