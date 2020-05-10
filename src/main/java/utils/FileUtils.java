@@ -18,7 +18,8 @@ public class FileUtils {
             String linha;
             int numLinha = 1;
 
-            try (BufferedReader br = new BufferedReader(new FileReader(String.format("src/main/resources/%s.txt", nomeArquivo)))) {
+            try {
+                BufferedReader br = new BufferedReader(new FileReader(String.format("src/main/resources/%s.txt", nomeArquivo)));
                 while ((linha = br.readLine()) != null) {
                     String[] lineArray = linha.split(DELIMITADOR);
 
@@ -37,6 +38,9 @@ public class FileUtils {
                     }
                 }
 
+            } catch (FileNotFoundException e) {
+                System.out.println(String.format("O arquivo de trechos %s.txt não foi encontrado!\n", nomeArquivo));
+                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -69,6 +73,9 @@ public class FileUtils {
 
                 }
 
+            } catch (FileNotFoundException e) {
+                System.out.println(String.format("O arquivo de encomendas %s.txt não foi encontrado!\n", nomeArquivo));
+                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
