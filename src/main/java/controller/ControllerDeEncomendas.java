@@ -23,11 +23,13 @@ public class ControllerDeEncomendas {
             for (Encomenda encomenda : encomendas) {
                 menorCaminhoDijkstra(encomenda.getOrigem());
                 if (!trechos.containsKey(encomenda.getOrigem())) {
-                    System.out.println(String.format("MapaDeTrechos não contém o vértice de origem: \"%s\"\n", encomenda.getOrigem()));
+                    System.out.println(String.format("Mapa de trechos não contém o vértice de origem: \"%s\"\n", encomenda.getOrigem()));
                 } else {
                     FileUtils.escreverArquivoRotas(trechos.get(encomenda.getDestino()), nomeArquivoRotas);
                 }
             }
+        } else {
+            System.out.println("A lista de encomendas e/ou nome do arquivo de rotas não podem ser nulos");
         }
     }
 
@@ -73,6 +75,8 @@ public class ControllerDeEncomendas {
                     }
                 }
             }
+        } else {
+            System.out.println("O nome da cidade de origem não podem ser nula");
         }
 
         return trechos;

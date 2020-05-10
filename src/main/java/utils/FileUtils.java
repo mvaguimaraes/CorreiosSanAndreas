@@ -40,6 +40,8 @@ public class FileUtils {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else {
+            System.out.println("O nome do arquivo de trechos não pode ser nulo");
         }
         return arestas;
     }
@@ -70,6 +72,8 @@ public class FileUtils {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else {
+            System.out.println("O nome do arquivo de encomendas não pode ser nulo");
         }
 
         return encomendas;
