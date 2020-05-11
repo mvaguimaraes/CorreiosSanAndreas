@@ -4,7 +4,7 @@
   
 O problema foi modelado utilizando a abordagem de *grafos*, onde cada cidade é equivalente a um vértice e a lista de trechos entre as cidades são equivalentes às arestas do grafo.  
   
-O problema de menor caminho em um grafo é um problema clássico da computação que consiste em determinar o menor caminho entre um vértice inicial `s ∈ V` e todos os demais vértices de V. Para resolvê-lo, foi escolhido o **algoritmo de Dijkstra**, concebido pelo cientista da computação holandês Edsger Dijkstra em 1956, soluciona o problema do caminho mais curto num grafo dirigido ou não dirigido com arestas de peso não negativo*, em tempo computacional `O(m + n log n)` onde m é o número de arestas e n é o número de vértices.  
+O problema de menor caminho em um grafo é um problema clássico da computação que consiste em determinar o menor caminho entre um vértice inicial `s ∈ V` e todos os demais vértices de V. Para resolvê-lo, foi escolhido o **algoritmo de Dijkstra**, concebido pelo cientista da computação holandês Edsger Dijkstra em 1956, que soluciona o problema do caminho mais curto num grafo dirigido ou não dirigido com arestas de peso não negativo*, em tempo computacional `O(m + n log n)` onde m é o número de arestas e n é o número de vértices.  
   
 **Por se tratar de um problema de distâncias entre cidades, foi assumido que não existem arestas de peso negativo no grafo resultante da modelagem do problema.*  
   
